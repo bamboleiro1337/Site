@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: olegkuchkuda1337@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "55554:80"
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - "55555:5432"

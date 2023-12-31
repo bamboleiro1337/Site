@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="scene">
+        <div class="register_container">
+
+        <form class="form" method="post" action="/web/register-final">
+
+
+            <div class="mb-1">
+                <!-- <label for="login" class="form-label">{{ title }}</label> -->
+                <h1 class="heading">Sign in</h1>
+            </div>
+            
+
+            <div class="mb-2">
+                <label for="login" class="form-label"></label>
+                <input name="login" type="email" class="form-control" id="login" required placeholder="E-mail" >
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="password" class="form-label"></label>
+                <input name="password" type="password" class="form-control" id="password" required minlength="{{ min_password_lenth }}" placeholder="Password">
+            </div>
+
+
+            <div class="mb-4">
+                <label for="name" class="form-label"></label>
+                <input name="name" type="text" class="form-control" id="name" required minlength="3" placeholder="Name">
+            </div>
+
+
+            <div class="mb-5">
+                <label for="second_name" class="form-label"></label>
+                <input name="second_name" type="text" class="form-control" id="second_name" placeholder="Second name">
+            </div>
+
+            <div class="mb-6">
+                <label for="age" class="form-label"></label>
+                <input name="age" type="number" class="form-control" id="age" placeholder="Age">
+            </div>
+
+            <div class="mb-7">
+                <button class="button" type="submit">Submit</button>
+            </div>
+
+
+        </form>
+        
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
