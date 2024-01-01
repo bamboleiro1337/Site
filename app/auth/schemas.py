@@ -10,6 +10,9 @@ class AuthDetails(BaseModel):
     password: str = Field(min_length=3, max_length=50, examples=['dfhaskdf&^R&^*B^w98723'])
     age: str = Field(min_length=1, max_length=2, examples=['14'])
     ip: str = Field(min_length=1, max_length=50, examples=['198.0.31.4'])
+    city: str = Field()
+    country: str = Field()
+    region: str = Field()
 
 
 

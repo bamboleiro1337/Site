@@ -11,6 +11,9 @@ async def create_user(
         password: str,
         age: str,
         ip: str,
+        city: str,
+        country: str,
+        region: str,
 ):
     
     async with async_session_maker() as session:
@@ -22,6 +25,9 @@ async def create_user(
             password=password,
             age=age,
             ip=ip,
+            city=city,
+            country=country,
+            region=region,
         ).returning(User.id, User.login, User.name)
 
 

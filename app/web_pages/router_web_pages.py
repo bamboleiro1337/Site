@@ -7,7 +7,10 @@ import dao
 import settings
 from app.auth import dependencies
 from app.auth.auth_lib import AuthHandler, AuthLibrary
-import pygeoip
+
+import re
+import json
+from urllib.request import urlopen
 
 
 
@@ -75,14 +78,25 @@ async def register_final(request: Request,
                          password: str = Form(),
                          age: str = Form(),
                          ip: str = Form(default=''),
+                         city: str = Form(default=''),
+                         country: str = Form(default=''),
+                         region: str = Form(default=''),
                          ): 
     
     is_login_already_used = await dao.get_user_by_login(login)
     
-
     ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
     
-    
+    ###############################
+    url = 'http://ipinfo.io/json'
+    response = urlopen(url)
+    location = json.load(response)
+
+    city = location['city']
+    country = location['country']
+    region = location['region']
+
+
     
     if is_login_already_used:
         context = {
@@ -105,6 +119,9 @@ async def register_final(request: Request,
         password=hashed_password,
         age=age,
         ip=ip, 
+        city=city,
+        country=country,
+        region=region,
     )
 
     token = await AuthHandler.encode_token(user_data[0])
