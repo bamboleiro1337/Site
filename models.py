@@ -23,8 +23,8 @@ class User(BaseInfoMixin, Base):
     
     age = Column(String, nullable=False)
     
+    ip = Column(String)
     # location = Column(String, nullable=False)
-    #ip = Column(String, nullable=False)
     
 
     def __repr__(self) -> str:

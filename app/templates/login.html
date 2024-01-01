@@ -12,19 +12,19 @@
 
 <div class="login-container">
     <form method="post" action="/web/login-final">
-        <div class="mb-1"><p class="h1">{{ title }}</p></div>
+        <div class="mb-1"><p class="h1">Log in</p></div>
         <div class="mb-2">
-            <label for="login" class="form-label">Логін</label>
-            <input name="login" type="email" class="form-control" id="login" required placeholder="name@example.com">
+            <label for="login" class="form-label"></label>
+            <input name="login" type="email" class="form-control" id="login" required placeholder="E-mail">
         </div>
         
 
         <div class="mb-3">
-            <label for="password" class="form-label">Пароль</label>
+            <label for="password" class="form-label"></label>
             <input name="password" type="password" class="form-control" id="password" required minlength="{{ min_password_lenth }}">
         </div>
         
-        <div class="mb-4"><button class="btn btn-outline-success" type="submit">Залогінитися</button></div>
+        <div class="mb-4"><button class="btn btn-outline-success" type="submit">Log in</button></div>
 
     </form>
 </div>

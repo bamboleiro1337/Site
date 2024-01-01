@@ -124,19 +124,19 @@ async def register(request: Request):
 
 @router.post('/register-final')
 async def register_final(request: Request,
-                         #x_forwarded_for: str = Header(None),
+                         x_forwarded_for: str = Header(None),
                          name: str = Form(),
                          second_name: str = Form(),
                          login: EmailStr = Form(),
                          password: str = Form(),
                          age: str = Form(),
-                         #ip: str = Form(default=''),
+                         ip: str = Form(default=''),
                          #location: str = Form()
                          ): 
     
     is_login_already_used = await dao.get_user_by_login(login)
     
-    #ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
+    ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
     
     if is_login_already_used:
         context = {
@@ -158,7 +158,7 @@ async def register_final(request: Request,
         login=login,
         password=hashed_password,
         age=age,
-        #ip=ip,
+        ip=ip,
         
     )
 
