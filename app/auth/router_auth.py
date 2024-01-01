@@ -30,7 +30,7 @@ async def register_api(request: Request, response: Response, auth_details: AuthD
         second_name=auth_details.second_name,
         login=auth_details.login,
         password=hashed_password,
-        age=auth_details.age,
+        age=auth_details.age,   
         ip=auth_details.ip
     )
 

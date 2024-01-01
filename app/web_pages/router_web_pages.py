@@ -7,6 +7,7 @@ import dao
 import settings
 from app.auth import dependencies
 from app.auth.auth_lib import AuthHandler, AuthLibrary
+import pygeoip
 
 
 
@@ -54,7 +55,7 @@ async def get_menu(request: Request, user=Depends(dependencies.get_current_user_
 async def register(request: Request):
     context = {
         'request': request,
-        'title': 'Реєстрація',
+        'title': 'Sign in',
         'min_password_length': settings.Settings.MIN_PASSWORD_LENGTH,
     }
 
@@ -64,63 +65,6 @@ async def register(request: Request):
     )
 
 
-# @router.post('/register-final')
-# async def register_final(request: Request,
-#                          #x_forwarded_for: str = Header(None),
-#                          name: str = Form(),
-#                          second_name: str = Form(),
-#                          login: EmailStr = Form(),
-#                          password: str = Form(),
-#                          age: str = Form(),
-#                          #ip: str = Form(default=''),
-#                          #location: str = Form()
-#                          ): 
-    
-#     is_login_already_used = await dao.get_user_by_login(login)
-    
-#     #ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
-    
-#     if is_login_already_used:
-#         context = {
-#             'request': request,
-#             'title': 'User error',
-#             'content': f'User {login} already exists',
-#         }
-#         return templates.TemplateResponse(
-#             '400.html',
-#             context=context,
-#             status_code=status.HTTP_406_NOT_ACCEPTABLE
-#         )
-    
-    
-    
-#     user_data = await dao.create_user(
-#         name=name,
-#         second_name=second_name,
-#         login=login,
-#         password=password,
-#         age=age,
-#         #ip=ip,
-        
-#     )
-
-#     token = await AuthHandler.encode_token(user_data[0])
-
-    
-#     context = {
-#         'request': request,
-#         'title': 'Про нас',
-#         'user': user_data,
-#     }
-
-#     template_response = templates.TemplateResponse(
-#         'home.html',
-#         context=context,
-#     )
-
-
-#     template_response.set_cookie(key='token', value=token, httponly=True)
-#     return template_response
 
 @router.post('/register-final')
 async def register_final(request: Request,
@@ -131,12 +75,14 @@ async def register_final(request: Request,
                          password: str = Form(),
                          age: str = Form(),
                          ip: str = Form(default=''),
-                         #location: str = Form()
                          ): 
     
     is_login_already_used = await dao.get_user_by_login(login)
     
+
     ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
+    
+    
     
     if is_login_already_used:
         context = {
@@ -158,8 +104,7 @@ async def register_final(request: Request,
         login=login,
         password=hashed_password,
         age=age,
-        ip=ip,
-        
+        ip=ip, 
     )
 
     token = await AuthHandler.encode_token(user_data[0])
@@ -186,7 +131,7 @@ async def register_final(request: Request,
 async def login(request: Request):
     context = {
         'request': request,
-        'title': 'Ввійти',
+        'title': 'Log in',
     }
 
     return templates.TemplateResponse(

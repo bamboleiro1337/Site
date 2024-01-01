@@ -10,8 +10,7 @@ async def create_user(
         login: str,
         password: str,
         age: str,
-        #location: str,
-        ip: str = '',
+        ip: str,
 ):
     
     async with async_session_maker() as session:
@@ -22,7 +21,6 @@ async def create_user(
             login=login,
             password=password,
             age=age,
-            #location=location,
             ip=ip,
         ).returning(User.id, User.login, User.name)
 
