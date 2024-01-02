@@ -8,7 +8,7 @@ import settings
 from app.auth import dependencies
 from app.auth.auth_lib import AuthHandler, AuthLibrary
 
-import re
+
 import json
 from urllib.request import urlopen
 
