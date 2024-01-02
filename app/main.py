@@ -18,7 +18,7 @@
 #     debug=True,
 # )
 
-# app.mount('/app/static', StaticFiles(directory='app/static'), name='static')
+# app.mount('/Logger/app/static', StaticFiles(directory='app/static'), name='static')
 
 
 # app.include_router(router_web_pages.router)

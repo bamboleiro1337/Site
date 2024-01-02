@@ -2,13 +2,6 @@ import os
 from dataclasses import dataclass
 
 from dotenv import load_dotenv
-import sentry_sdk
-
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-
-from app.auth import router_auth
-from app.web_pages import router_web_pages
 
 
 
@@ -36,7 +29,14 @@ class Settings:
                f'{Settings.DATABASE_HOST}:{Settings.DATABASE_PORT}/{Settings.DATABASE_NAME}'
                
                
+               
+#do not move these imports to top
+import sentry_sdk
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
+from app.auth import router_auth
+from app.web_pages import router_web_pages
 
 sentry_sdk.init(
     dsn="https://1a6b12e7dbf7418233793cb807de9e53@o4505229726318592.ingest.sentry.io/4505761003864065",
@@ -51,7 +51,7 @@ app = FastAPI(
     debug=True,
 )
 
-app.mount('/app/static', StaticFiles(directory='app/static'), name='static')
+app.mount('/Logger/app/static', StaticFiles(directory='app/static'), name='static')
 
 
 app.include_router(router_web_pages.router)
