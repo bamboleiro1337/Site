@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>zalupa bobra</title>
+    <title>Zalupa Bobra</title>
     <link href="{{ url_for('static', path='styles/base.css') }}" rel="stylesheet">
     
     {% block title %}
@@ -21,6 +21,7 @@
     {% if user %}
 
     <a class="nav_item" href="/web/logout">Logout({{ user[2] if user[2] else user.name }})</a>
+    <a class="nav_item" href="/web/message">Повідомлення</a>
 
     {% else %}
 
@@ -35,6 +36,23 @@
 {% block content %}
 {% endblock %}
 
+<script>
+  var ws = new WebSocket ("ws://localhost:8000/ws/");
+  /*var ws = new WebSocket ("wss://c187-194-44-36-178.ngrok-free.app")*/
+  ws.onmessage = function(event) {
+    console.log(event)
+    alert(event.data)
+
+  };
+
+  function sendMessage(event) {
+    var text = document.getElementById('messageText')
+    ws.send(text.value)
+    text.value = ''
+    event.preventDefault()
+  }
+
+  </script>
 
 </body>
 </html>

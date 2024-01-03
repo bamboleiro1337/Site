@@ -199,3 +199,17 @@ async def logout(request: Request, response: Response, user=Depends(dependencies
     result.delete_cookie('token')
     return result
 
+
+
+@router.get('/message')
+async def message(request: Request):
+    context = {
+        'request': request,
+        'title': 'Написати для всіх повідомлення',
+
+    }
+
+    return templates.TemplateResponse(
+        'msg.html',
+        context=context,
+    )
