@@ -1,7 +1,6 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
 
-
 class ConnectionManager:
     def __init__(self):
         self.active_connections: list[WebSocket] = []

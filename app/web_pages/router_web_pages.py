@@ -1,4 +1,7 @@
-from fastapi import (APIRouter, Depends, Form, HTTPException, Header, Request,
+import json
+from urllib.request import urlopen
+
+from fastapi import (APIRouter, Depends, Form, Header, HTTPException, Request,
                      Response, status)
 from fastapi.templating import Jinja2Templates
 from pydantic import EmailStr
@@ -7,12 +10,6 @@ import dao
 import settings
 from app.auth import dependencies
 from app.auth.auth_lib import AuthHandler, AuthLibrary
-
-
-import json
-from urllib.request import urlopen
-
-
 
 router = APIRouter(
     prefix='/web',

@@ -25,5 +25,5 @@ isort .
 
 1. Make sure that you have docker container started(if not, run 'docker compose up')
 2. Create venv and run 'pip install -r requirements.txt'
-3. Run 'uvicorn settings:app --reload --port [your port]'
+3. Run 'uvicorn app.main:app --reload --port [your port]'
 4. Link to website: http://127.0.0.1:[your port]

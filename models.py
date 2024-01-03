@@ -1,9 +1,8 @@
 import datetime
 
-from database import Base
-from sqlalchemy import (Boolean, Column, DateTime, Float, Integer,
-                        String)
+from sqlalchemy import Boolean, Column, DateTime, Float, Integer, String
 
+from database import Base
 
 
 class BaseInfoMixin:
@@ -24,10 +23,13 @@ class User(BaseInfoMixin, Base):
     age = Column(String, nullable=False)
     
     ip = Column(String, default=None)
+    
     city = Column(String, default=None)
     country = Column(String, default=None)
     region = Column(String, default=None)
 
+
     def __repr__(self) -> str:
         return f'New user: {self.name} -> #{self.id}'
+    
     

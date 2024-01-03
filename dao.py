@@ -1,7 +1,7 @@
-from database import async_session_maker
-from models import User
 from sqlalchemy import delete, insert, select, update
 
+from database import async_session_maker
+from models import User
 
 
 async def create_user(

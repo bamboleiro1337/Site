@@ -16,6 +16,7 @@ class AuthDetails(BaseModel):
 
 
 
+
 class AuthRegistered(BaseModel):
     success: bool = Field(examples=[True])
     id: int = Field(examples=[656])
