@@ -43,7 +43,7 @@ async def get_menu(request: Request, user=Depends(dependencies.get_current_user_
         'title': 'Home',
         'user': user,
     }
-
+    print(context)
     return templates.TemplateResponse(
         'home.html',
         context=context,
@@ -150,6 +150,7 @@ async def login(request: Request):
     context = {
         'request': request,
         'title': 'Log in',
+        
     }
 
     return templates.TemplateResponse(
@@ -185,7 +186,6 @@ async def login(request: Request, login: EmailStr = Form(), password: str = Form
 @router.post('/logout')
 @router.get('/logout')
 async def logout(request: Request, response: Response, user=Depends(dependencies.get_current_user_optional)):
-    
     
     
     context = {
