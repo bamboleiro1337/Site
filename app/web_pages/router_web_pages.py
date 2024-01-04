@@ -40,7 +40,7 @@ async def get_main_page(request: Request, user=Depends(dependencies.get_current_
 async def get_menu(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
-        'title': 'Головна',
+        'title': 'Home',
         'user': user,
     }
 
@@ -130,7 +130,7 @@ async def register_final(request: Request,
     
     context = {
         'request': request,
-        'title': 'Про нас',
+        'title': 'Register final',
         'user': user_data,
     }
 
@@ -167,7 +167,7 @@ async def login(request: Request, login: EmailStr = Form(), password: str = Form
     
     context = {
         'request': request,
-        'title': 'Наше меню',
+        'title': 'Login final',
         'user': user,
     }
 
@@ -190,7 +190,7 @@ async def logout(request: Request, response: Response, user=Depends(dependencies
     
     context = {
         'request': request,
-        'title': 'Наше меню',
+        'title': 'Logout',
 
     }
     result = templates.TemplateResponse(
@@ -206,7 +206,7 @@ async def logout(request: Request, response: Response, user=Depends(dependencies
 async def message(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
-        'title': 'Написати для всіх повідомлення',
+        'title': 'Message',
         'user': user,
 
     }
