@@ -14,6 +14,8 @@ async def create_user(
         city: str,
         country: str,
         region: str,
+        is_admin: bool,
+
 ):
     
     async with async_session_maker() as session:
@@ -28,6 +30,8 @@ async def create_user(
             city=city,
             country=country,
             region=region,
+            is_admin=is_admin,
+
         ).returning(User.id, User.login, User.name)
 
 
@@ -88,3 +92,8 @@ async def delete_user(user_id: int):
 
         await session.execute(query)
         await session.commit(query)
+
+
+
+
+

@@ -34,7 +34,8 @@ async def register_api(request: Request, response: Response, auth_details: AuthD
         ip=auth_details.ip,
         city=auth_details.city,
         country=auth_details.country,
-        region=auth_details.region
+        region=auth_details.region,
+        is_admin=auth_details.is_admin
     )
 
     token = await AuthHandler.encode_token(user_data[0])

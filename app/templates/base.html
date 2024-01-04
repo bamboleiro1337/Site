@@ -18,17 +18,30 @@
 
     <a class="nav_item" href="/web/home">Home</a>
 
-    {% if user %}
 
-    <a class="nav_item" href="/web/logout">Logout({{ user[2] if user[2] else user.name }})</a>
-    <a class="nav_item" href="/web/message">Повідомлення</a>
+
+    {% if user %}
+      {% if user.is_admin == true %}
+
+        <a class="nav_item" href="/web/logout">Logout({{ user[2] if user[2] else user.name }})</a>
+        <a class="nav_item" href="/web/message">Message</a>
+
+
+      {% else %}
+
+        <a class="nav_item" href="/web/logout">Logout({{ user[2] if user[2] else user.name }})</a>
+
+
+      {% endif %}
 
     {% else %}
+
 
     <a class="nav_item" href="/web/register" >Sign up</a>
     <a class="nav_item" href="/web/login">Log in</a>
 
     {% endif %}
+
   </div>
 </header>
 

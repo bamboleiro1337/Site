@@ -27,3 +27,8 @@ isort .
 2. Create venv and run 'pip install -r requirements.txt'
 3. Run 'uvicorn app.main:app --reload --port [your port]'
 4. Link to website: http://127.0.0.1:[your port]
+
+
+Admin account
+Login: user2@user.use
+Password: qwerqrweqwer

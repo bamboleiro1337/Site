@@ -28,8 +28,13 @@ class User(BaseInfoMixin, Base):
     country = Column(String, default=None)
     region = Column(String, default=None)
 
+    is_admin = Column(Boolean, default=False)
+    
 
     def __repr__(self) -> str:
         return f'New user: {self.name} -> #{self.id}'
-    
-    
+
+
+
+    def is_administrator(self):
+        return self.is_admin

@@ -11,6 +11,8 @@ import settings
 from app.auth import dependencies
 from app.auth.auth_lib import AuthHandler, AuthLibrary
 
+
+
 router = APIRouter(
     prefix='/web',
     tags=['menu', 'landing'],
@@ -78,13 +80,14 @@ async def register_final(request: Request,
                          city: str = Form(default=''),
                          country: str = Form(default=''),
                          region: str = Form(default=''),
+                         is_admin: bool = Form(default=False)
                          ): 
     
     is_login_already_used = await dao.get_user_by_login(login)
     
     ip = x_forwarded_for.split(",")[0] if x_forwarded_for else None
     
-    ###############################
+
     url = 'http://ipinfo.io/json'
     response = urlopen(url)
     location = json.load(response)
@@ -119,6 +122,7 @@ async def register_final(request: Request,
         city=city,
         country=country,
         region=region,
+        is_admin=is_admin
     )
 
     token = await AuthHandler.encode_token(user_data[0])
@@ -199,10 +203,11 @@ async def logout(request: Request, response: Response, user=Depends(dependencies
 
 
 @router.get('/message')
-async def message(request: Request):
+async def message(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
         'title': 'Написати для всіх повідомлення',
+        'user': user,
 
     }
 
