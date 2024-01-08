@@ -10,7 +10,7 @@ import settings
 
 
 class AuthHandler:
-    pwd_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
+    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     secret = settings.Settings.TOKEN_SECRET
     algorithm = settings.Settings.TOKEN_ALGORITHM
 
@@ -72,10 +72,9 @@ class AuthLibrary:
     @classmethod
     async def authenticate_user(cls, login: EmailStr, password: str):
         user = await dao.get_user_by_login(login)
-        if not (user and password == user.password):
+        if not (user and password==user.password):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail=f'Incorrect login "{login}" or password'
+                detail=f'incorrect login "{login}" or password'
             )
         return user
-

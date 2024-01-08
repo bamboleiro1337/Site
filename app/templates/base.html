@@ -17,31 +17,28 @@
   <div class="logo_block">qwqweqw</div>
   <div class="nav_menu">
 
+    
     <a class="nav_item" href="/web/home">Home</a>
-
 
 
     {% if user %}
       <a class="nav_item" href="/web/logout">Logout({{ user[2] if user[2] else user.name }})</a>
 
       {% if user.is_admin == true %}
-
-        
         <a class="nav_item" href="/web/message">Message</a>
-
-
       {% endif %}
 
+
     {% else %}
-
-
       <a class="nav_item" href="/web/register" >Sign up</a>
       <a class="nav_item" href="/web/login">Log in</a>
 
     {% endif %}
 
+    
   </div>
 </header>
+
 
 
 {% block content %}

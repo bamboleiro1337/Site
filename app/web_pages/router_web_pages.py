@@ -40,10 +40,10 @@ async def get_main_page(request: Request, user=Depends(dependencies.get_current_
 async def get_menu(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
-        'title': 'Home',
+        'title': 'Головна',
         'user': user,
     }
-    print(context)
+
     return templates.TemplateResponse(
         'home.html',
         context=context,
@@ -57,7 +57,7 @@ async def get_menu(request: Request, user=Depends(dependencies.get_current_user_
 async def register(request: Request):
     context = {
         'request': request,
-        'title': 'Sign in',
+        'title': 'Реєстрація',
         'min_password_length': settings.Settings.MIN_PASSWORD_LENGTH,
     }
 
@@ -146,11 +146,11 @@ async def register_final(request: Request,
 
 
 @router.get('/login')
-async def login(request: Request):
+async def login(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
         'title': 'Log in',
-        
+        'user': user        
     }
 
     return templates.TemplateResponse(

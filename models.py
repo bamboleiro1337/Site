@@ -36,5 +36,5 @@ class User(BaseInfoMixin, Base):
 
 
 
-    def is_administrator(self):
+    def is_administrator(self) -> bool:
         return self.is_admin

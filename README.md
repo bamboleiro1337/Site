@@ -10,13 +10,24 @@ pip install websockets
 pip install pyjwt
 
 
-alembic init migration
-alembic revision --autogenerate -m 'initial' 
- alembic upgrade head
+If you made some changes in models:
+1. alembic init migration
+2. alembic revision --autogenerate -m 'your_name' 
+3. alembic upgrade head
+
+
+If something gone wrong in db:
  alembic downgrade -1
+ It`s like backup btw
+
+ Result: "second -> first" 
 
 
+
+If you need to test this piece of shit:
 pytest -vs .
+
+If you need to make clear code
 isort .
 
 

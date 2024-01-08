@@ -13,7 +13,7 @@ class AuthDetails(BaseModel):
     city: str = Field()
     country: str = Field()
     region: str = Field()
-    is_admin: bool = Field()
+    is_admin: bool = Field(examples=[False])
 
 
 
