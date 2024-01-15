@@ -54,11 +54,12 @@ async def get_menu(request: Request, user=Depends(dependencies.get_current_user_
 
 @router.get('/register')
 @router.post('/register')
-async def register(request: Request):
+async def register(request: Request, user=Depends(dependencies.get_current_user_optional)):
     context = {
         'request': request,
         'title': 'Реєстрація',
         'min_password_length': settings.Settings.MIN_PASSWORD_LENGTH,
+        'user': user
     }
 
     return templates.TemplateResponse(
@@ -191,6 +192,7 @@ async def logout(request: Request, response: Response, user=Depends(dependencies
     context = {
         'request': request,
         'title': 'Logout',
+        'user': user
 
     }
     result = templates.TemplateResponse(

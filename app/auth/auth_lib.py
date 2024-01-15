@@ -75,6 +75,6 @@ class AuthLibrary:
         if not (user and password==user.password):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail=f'incorrect login "{login}" or password'
+                detail=f'Incorrect login "{login}" or password'
             )
         return user
