@@ -43,7 +43,8 @@ async def get_menu(request: Request, user=Depends(dependencies.get_current_user_
         'title': 'Головна',
         'user': user,
     }
-
+    if not user:
+        1/0
     return templates.TemplateResponse(
         'home.html',
         context=context,
