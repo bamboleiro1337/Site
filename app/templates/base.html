@@ -4,65 +4,110 @@
     <meta charset="UTF-8">
     <title>qwqweqwe</title>
     <link href="{{ url_for('static', path='styles/base.css') }}" rel="stylesheet">
-    <link rel="website icon" href="{{ url_for('static', path='icon.ico') }}" class="href">
+    <link rel="icon" href="{{ url_for('static', path='icon.ico') }}">
     
-    {% block title %}
-    {% endblock %}
-
+    {% block title %}{% endblock %}
     
+    <style>
+        /* Quick inline improvements for a modern look */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f8fa;
+            color: #333;
+        }
+        .base_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background-color: #1f2937;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .logo_block {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .nav_menu a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #d1d5db;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav_menu a:hover {
+            color: #fbbf24;
+        }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        #messageText {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button.send-btn {
+            padding: 0.5rem 1rem;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button.send-btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
 </head>
 <body>
 
-  <header class="base_header">
+<header class="base_header">
     <div class="logo_block">qwqweqw</div>
     <div class="nav_menu">
-  
-      <a class="nav_item" href="/web/home">Home</a>
-  
-      {% if user %}
-        <a class="nav_item" href="/web/logout">Logout ({{ user[2] if user[2] else user.name }})</a>
-  
-        {% if user.is_admin == true %}
-          <a class="nav_item" href="/web/message">Message</a>
+        <a class="nav_item" href="/web/home">Home</a>
+        
+        {% if user %}
+            <a class="nav_item" href="/web/logout">
+                Logout ({{ user[2] if user[2] else user.name }})
+            </a>
+            {% if user.is_admin == true %}
+                <a class="nav_item" href="/web/message">Message</a>
+            {% endif %}
+        {% else %}
+            <a class="nav_item" href="/web/register">Sign up</a>
+            <a class="nav_item" href="/web/login">Log in</a>
         {% endif %}
-  
-      {% else %}
-        <a class="nav_item" href="/web/register">Sign up</a>
-        <a class="nav_item" href="/web/login">Log in</a>
-      {% endif %}
-  
     </div>
-  </header>
-  
-    
-  </div>
 </header>
 
-
-
-{% block content %}
-{% endblock %}
+<div class="content-wrapper">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <script>
-  var ws = new WebSocket ("ws://localhost:8000/ws/");
-  /*var ws = new WebSocket ("wss://c187-194-44-36-178.ngrok-free.app")*/
-  ws.onmessage = function(event) {
-    console.log(event)
-    alert(event.data)
+    const ws = new WebSocket("ws://localhost:8000/ws/");
+    // const ws = new WebSocket("wss://c187-194-44-36-178.ngrok-free.app");
 
-  };
+    ws.onmessage = function(event) {
+        console.log(event);
+        alert(event.data);
+    };
 
-  function sendMessage(event) {
-    var text = document.getElementById('messageText')
-    ws.send(text.value)
-    text.value = ''
-    event.preventDefault()
-  }
-
-  </script>
+    function sendMessage(event) {
+        const text = document.getElementById('messageText');
+        ws.send(text.value);
+        text.value = '';
+        event.preventDefault();
+    }
+</script>
 
 </body>
 </html>
-
-
-
